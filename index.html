@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="世界遺産検定3級対策サイト。100問の四択問題で合格を目指そう！">
+    <title>世界遺産検定3級 対策サイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <h1>🏛️ 世界遺産検定3級 対策サイト</h1>
+        <p class="subtitle">100問マスターで合格を目指そう！</p>
+    </header>
+
+    <!-- メインコンテナ -->
+    <div class="container">
+        <!-- 設定パネル -->
+        <div class="settings-panel">
+            <button class="settings-btn" id="settingsBtn" aria-label="設定を開く">⚙️</button>
+            <div class="settings-dropdown" id="settingsDropdown">
+                <div class="setting-item">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span>🌙 ダークモード</span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="soundToggle" checked>
+                        <span>🔊 効果音</span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <button class="btn-text" id="resetProgressBtn">🔄 進捗をリセット</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- スタート画面 -->
+        <div class="start-screen" id="startScreen">
+            <div class="welcome-message">
+                <h2>ようこそ！</h2>
+                <p>学習方法を選択してください</p>
+            </div>
+            
+            <div class="mode-buttons">
+                <button class="mode-btn" id="sequentialBtn">
+                    <span class="mode-icon">📚</span>
+                    <span class="mode-title">順番に出題</span>
+                    <span class="mode-desc">1問目から順番に学習</span>
+                </button>
+                
+                <button class="mode-btn" id="randomBtn">
+                    <span class="mode-icon">🎲</span>
+                    <span class="mode-title">ランダム出題</span>
+                    <span class="mode-desc">ランダムな順序で出題</span>
+                </button>
+                
+                <button class="mode-btn" id="categoryBtn">
+                    <span class="mode-icon">🗂️</span>
+                    <span class="mode-title">カテゴリ別</span>
+                    <span class="mode-desc">分野を絞って学習</span>
+                </button>
+                
+                <button class="mode-btn" id="reviewBtn">
+                    <span class="mode-icon">🔄</span>
+                    <span class="mode-title">間違えた問題</span>
+                    <span class="mode-desc">復習で弱点克服</span>
+                </button>
+            </div>
+
+            <!-- カテゴリ選択 -->
+            <div class="category-select hidden" id="categorySelect">
+                <h3>カテゴリを選択</h3>
+                <div class="category-buttons" id="categoryButtons"></div>
+                <button class="btn-secondary" id="backToModeBtn">戻る</button>
+            </div>
+
+            <!-- 統計情報 -->
+            <div class="overall-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalAnswered">0</div>
+                    <div class="stat-label">解答数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCorrect">0</div>
+                    <div class="stat-label">正解数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="correctRate">0%</div>
+                    <div class="stat-label">正解率</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- クイズ画面 -->
+        <div class="quiz-screen hidden" id="quizScreen">
+            <!-- 統計バー -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label">問題</span>
+                    <span class="stat-value" id="currentQuestion">1/100</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">正解</span>
+                    <span class="stat-value" id="correctCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">連続</span>
+                    <span class="stat-value" id="streakCount">0</span>
+                </div>
+            </div>
+
+            <!-- 問題エリア -->
+            <div class="question-area">
+                <div class="question-header">
+                    <span class="question-number" id="questionNumber">第1問</span>
+                    <span class="question-category" id="questionCategory"></span>
+                </div>
+                <div class="question-text" id="questionText"></div>
+                
+                <div class="choices" id="choices"></div>
+            </div>
+
+            <!-- 解説エリア -->
+            <div class="explanation-area hidden" id="explanationArea">
+                <div class="explanation-header">📖 解説</div>
+                <div class="explanation-text" id="explanationText"></div>
+                <button class="btn-primary btn-next" id="nextBtn">次の問題へ →</button>
+            </div>
+
+            <!-- 戻るボタン -->
+            <div class="quiz-footer">
+                <button class="btn-text" id="backToStartBtn">← スタート画面に戻る</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 結果オーバーレイ -->
+    <div class="result-overlay hidden" id="resultOverlay">
+        <div class="result-card">
+            <div class="result-icon" id="resultIcon"></div>
+            <div class="result-message" id="resultMessage"></div>
+            <div class="streak-message hidden" id="streakMessage"></div>
+        </div>
+    </div>
+
+    <!-- ローディング画面 -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>問題を読み込んでいます...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
